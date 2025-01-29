@@ -1,11 +1,10 @@
-
 # org_to_md.nvim
 
-Un plugin para Neovim que convierte texto en formato Org-mode a Markdown y lo copia al portapapeles.
+A Neovim plugin that converts text from Org-mode format to Markdown and copies it to the clipboard.
 
-## Instalación
+## Installation
 
-### Usando Lazy.nvim
+### Using Lazy.nvim
 
 ```lua
 {
@@ -16,7 +15,7 @@ Un plugin para Neovim que convierte texto en formato Org-mode a Markdown y lo co
 }
 ```
 
-### Usando Packer.nvim
+### Using Packer.nvim
 
 ```lua
 use {
@@ -27,28 +26,28 @@ use {
 }
 ```
 
-### Instalación manual
+### Manual Installation
 
 ```sh
 git clone https://github.com/chutipascal/org_to_md.nvim ~/.config/nvim/lua/org_to_md
 ```
 
-Luego en tu `init.lua` agrega:
+Then add to your `init.lua`:
 
 ```lua
 require("org_to_md").setup()
 ```
 
-## Uso
+## Usage
 
-1. Selecciona texto en Org-mode en **modo visual** (`v`).
-2. Ejecuta el comando:
+1. Select text in Org-mode in **visual mode** (`v`).
+2. Run the command:
    ```
    :CopyOrgToMd
    ```
-3. El texto convertido a Markdown se copiará al portapapeles.
+3. The text converted to Markdown will be copied to the clipboard.
 
-## Licencia
+## License
 
 MIT License.
 

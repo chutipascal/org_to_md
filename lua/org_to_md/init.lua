@@ -1,40 +1,40 @@
--- org_to_md.lua - Un plugin de Neovim para convertir Org-mode a Markdown y copiar al portapapeles
+-- org_to_md.nvim - A Neovim plugin to convert Org-mode to Markdown and copy to clipboard
 
 local M = {}
 
--- Función para convertir Org-mode a Markdown
+-- Function to convert Org-mode to Markdown
 local function org_to_md(text)
-	text = text:gsub("%*%*([^%*]+)%*%*", "**%1**") -- Negritas
-	text = text:gsub("%*([^%*]+)%*", "_%1_") -- Itálicas
-	text = text:gsub("^%*%s*(.-)$", "# %1") -- Encabezados de nivel 1
-	text = text:gsub("^%*%*%s*(.-)$", "## %1") -- Encabezados de nivel 2
-	text = text:gsub("^%*%*%*%s*(.-)$", "### %1") -- Encabezados de nivel 3
-	text = text:gsub("%[%(.-%)%]%((.-)%)", "[%1](%2)") -- Enlaces
+	text = text:gsub("%*%*([^%*]+)%*%*", "**%1**") -- Bold
+	text = text:gsub("%*([^%*]+)%*", "_%1_") -- Italics
+	text = text:gsub("^%*%s*(.-)$", "# %1") -- Level 1 headers
+	text = text:gsub("^%*%*%s*(.-)$", "## %1") -- Level 2 headers
+	text = text:gsub("^%*%*%*%s*(.-)$", "### %1") -- Level 3 headers
+	text = text:gsub("%[%(.-%)%]%((.-)%)", "[%1](%2)") -- Links
 	return text
 end
 
--- Función principal para copiar la selección convertida al portapapeles
+-- Main function to copy the converted selection to the clipboard
 function M.copy_org_to_md()
-	-- Obtener la selección
+	-- Get the selection
 	local start_pos = vim.fn.getpos("'<")
 	local end_pos = vim.fn.getpos("'>")
 	local lines = vim.fn.getline(start_pos[2], end_pos[2])
 
-	-- Convertir de Org-mode a Markdown
+	-- Convert from Org-mode to Markdown
 	for i, line in ipairs(lines) do
 		lines[i] = org_to_md(line)
 	end
 
-	-- Copiar al portapapeles
+	-- Copy to clipboard
 	local joined_text = table.concat(lines, "\n")
 	vim.fn.setreg("+", joined_text)
-	print("Texto convertido y copiado al portapapeles")
+	print("Text converted and copied to clipboard")
 end
 
--- Comando para llamar la función
+-- Command to call the function
 vim.api.nvim_create_user_command("CopyOrgToMd", M.copy_org_to_md, { range = true })
 
--- Configuración del plugin
+-- Plugin setup
 function M.setup()
 	vim.api.nvim_create_user_command("CopyOrgToMd", M.copy_org_to_md, { range = true })
 end
