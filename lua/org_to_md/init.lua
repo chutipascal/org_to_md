@@ -10,6 +10,8 @@ local function org_to_md(text)
 	text = text:gsub("^%*%*%s*(.-)$", "## %1") -- Level 2 headers
 	text = text:gsub("^%*%*%*%s*(.-)$", "### %1") -- Level 3 headers
 	text = text:gsub("%[%(.-%)%]%((.-)%)", "[%1](%2)") -- Links
+	text = text:gsub("#%+BEGIN_SRC%s*(.-)%s*\n", "```%1\n") -- Begin source block
+	text = text:gsub("#%+END_SRC", "```") -- End source block
 	return text
 end
 
