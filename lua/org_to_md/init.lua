@@ -17,6 +17,16 @@ local function org_to_md(text)
 	return text
 end
 
+-- TODO: Remove the first and last line of the table if they are the titles or the end of the table
+--
+-- Ejemplo de uso
+-- | Piu    | Firmware                   | Estado        | IP         |
+-- | ------ | -------------------------- | ------------- | ---------- |
+-- | Piu 21 | RUT2<sub>R00</sub>.07.04.5 | (No funciona) | 10.3.7.21  |
+-- | Piu 56 | RUT2<sub>R00</sub>.07.06   | (Funciona)    | 10.3.7.147 |
+--
+-- No contiene linea al principio de la tabla, sobre los titulos ni al final de la tabla
+
 -- Main function to copy the converted selection to the clipboard
 function M.copy_org_to_md()
 	-- Get the selection
