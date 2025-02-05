@@ -12,6 +12,8 @@ local function org_to_md(text)
 	text = text:gsub("%[%(.-%)%]%((.-)%)", "[%1](%2)") -- Links
 	text = text:gsub("#%+BEGIN_SRC%s*(.-)%s*\n", "```%1\n") -- Begin source block
 	text = text:gsub("#%+END_SRC", "```") -- End source block
+	text = text:gsub("|%s*(.-)%s*|", "| %1 |") -- Table row
+	text = text:gsub("|%s*%-+%s*|", "|---|") -- Table separator
 	return text
 end
 
